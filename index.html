@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>গাড়িমেলা · Gari Mela | নগদ বা কিস্তিতে ব্যবহৃত পিকআপ, ট্রাক ও বাস</title>
+  <meta name="description" content="গাড়িমেলায় আপনার স্বপ্নের গাড়ি কিনুন নগদ বা কিস্তিতে। মাহিন্দ্রা, টাটা, আইশারসহ ১৫টি ব্র্যান্ডের ব্যবহৃত পিকআপ, ট্রাক ও বাস, সারাদেশের ডিপোতে।">
+  <meta name="theme-color" content="#ED1C25">
+  <meta property="og:title" content="গাড়িমেলা · Gari Mela">
+  <meta property="og:description" content="নগদ বা কিস্তিতে ব্যবহৃত পিকআপ, ট্রাক ও বাস। হটলাইন ১৬৭৫৮">
+  <meta property="og:image" content="assets/img/lineup-sm.webp">
+  <link rel="icon" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://garimela-storage.sgp1.cdn.digitaloceanspaces.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wdth,wght@75..125,300..800&display=swap">
+  <link rel="preload" as="image" href="assets/img/lineup.webp" media="(min-width: 700px)">
+  <link rel="preload" as="image" href="assets/img/lineup-sm.webp" media="(max-width: 699px)">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body data-page="home" class="is-home">
+<header id="site-header"></header>
+
+<main id="main">
+
+  <!-- ============ HERO: four planes on one scroll value ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__stage">
+      <div class="hero__back" aria-hidden="true"></div>
+      <p class="hero__word" aria-hidden="true"><span data-lang="bn">গাড়িমেলা</span><span data-lang="en">GARI MELA</span></p>
+
+      <div class="hero__copy wrap">
+        <h1 id="hero-title">
+          <span data-lang="bn">গাড়িমেলায় আপনার স্বপ্নের গাড়ি কিনুন</span>
+          <span data-lang="en">Buy your dream vehicle at Gari Mela</span>
+        </h1>
+        <p class="hero__sub">
+          <span data-lang="bn">নগদ বা কিস্তিতে। যাচাই করা তালিকা, সারাদেশের ডিপোতে দেখে কেনার সুযোগ।</span>
+          <span data-lang="en">Cash or installments. Verified listings you can inspect at depots across the country.</span>
+        </p>
+        <ul class="hero__facts" aria-label="Gari Mela in numbers">
+          <li><strong class="num" data-count="available">425</strong><span data-lang="bn">টি গাড়ি এখন বিক্রির জন্য</span><span data-lang="en">vehicles for sale now</span></li>
+          <li><strong class="num" data-count="brands">15</strong><span data-lang="bn">টি ব্র্যান্ড</span><span data-lang="en">brands</span></li>
+          <li><strong class="num" data-count="depots">30</strong><span data-lang="bn">টি জেলায় ডিপো</span><span data-lang="en">districts with depots</span></li>
+        </ul>
+      </div>
+
+      <p class="hero__beat" aria-hidden="true">
+        <span data-lang="bn">যেকোনো ব্র্যান্ডের ব্যবহৃত<br>পিকআপ, ট্রাক ও বাস</span>
+        <span data-lang="en">Used pickups, trucks<br>and buses from every brand</span>
+      </p>
+
+      <div class="hero__lineup">
+        <picture>
+          <source media="(max-width: 699px)" srcset="assets/img/lineup-sm.webp">
+          <img src="assets/img/lineup.webp" width="2400" height="517" fetchpriority="high"
+               alt="Seven pickups and trucks from JAC, Foton, Mahindra, Eicher and Tata lined up on the Gari Mela stage">
+        </picture>
+      </div>
+      <div class="hero__floor" aria-hidden="true"></div>
+
+      <form class="hero__search glass" data-search role="search" action="vehicles.html">
+        <label class="sr-only" for="hq" data-i18n="searchBtn"></label>
+        <span class="hero__search-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#search"/></svg></span>
+        <input id="hq" name="q" type="search" autocomplete="off" enterkeyhint="search" data-i18n-ph="searchPh">
+        <label class="sr-only" for="ht" data-i18n="anyType"></label>
+        <select id="ht" name="type"><option value="" data-i18n="anyType"></option></select>
+        <button class="btn btn--primary" type="submit"><span data-i18n="searchBtn"></span></button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ BODY TYPES ============ -->
+  <section class="section section--types" aria-labelledby="types-title">
+    <div class="wrap">
+      <div class="section__head">
+        <h2 class="h2" id="types-title"><span data-lang="bn">কোন ধরনের গাড়ি খুঁজছেন?</span><span data-lang="en">What are you looking for?</span></h2>
+        <a class="link" href="vehicles.html"><span data-i18n="viewAll"></span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-right"/></svg></a>
+      </div>
+      <div class="types reveal" id="types">
+        <div class="skel" style="height:180px"></div><div class="skel" style="height:180px"></div><div class="skel" style="height:180px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHOWROOM ============ -->
+  <section class="section section--showroom" aria-labelledby="showroom-title">
+    <div class="wrap">
+      <div class="section__head">
+        <div>
+          <h2 class="h2" id="showroom-title"><span data-lang="bn">শোরুম</span><span data-lang="en">The showroom</span></h2>
+          <p class="lede"><span data-lang="bn">ছবি, দাম ও ডিপো সহ এখন বিক্রির জন্য থাকা গাড়ি। প্রতিটি গাড়ি কেনার আগে দেখে নিতে পারবেন।</span><span data-lang="en">What's for sale right now, with photos, price and depot. Every vehicle can be inspected before you buy.</span></p>
+        </div>
+        <div class="rail-ctrl">
+          <button type="button" id="showroom-prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-left"/></svg></button>
+          <button type="button" id="showroom-next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-right"/></svg></button>
+        </div>
+      </div>
+      <div class="seg glass" id="showroom-tabs" role="tablist" aria-label="Vehicle type"></div>
+      <div class="rail" id="showroom-rail" aria-live="polite">
+        <div class="skel" style="height:380px"></div><div class="skel" style="height:380px"></div><div class="skel" style="height:380px"></div><div class="skel" style="height:380px"></div>
+      </div>
+      <a class="btn btn--dark" id="showroom-more" href="vehicles.html"><span></span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-right"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ============ DEPOT MAP (signature) ============ -->
+  <section class="section section--map" aria-labelledby="map-title">
+    <div class="wrap map-grid">
+      <div class="map-intro">
+        <h2 class="h2" id="map-title"><span data-lang="bn">আপনার কাছের ডিপোতেই<br>গাড়ি দাঁড়িয়ে আছে</span><span data-lang="en">There's a vehicle parked<br>near you</span></h2>
+        <p class="lede"><span data-lang="bn">সারাদেশে <b class="num" data-count="depots">30</b>টি জেলার ডিপোতে আমাদের গাড়ি রয়েছে। আপনার জেলায় চাপুন, দেখুন কী কী আছে।</span><span data-lang="en">Our stock sits at depots in <b class="num" data-count="depots">30</b> districts. Tap your district to see what's there.</span></p>
+        <div class="depot-list" id="depot-list" aria-label="Districts"></div>
+      </div>
+      <figure class="map-figure">
+        <svg id="bd-map" class="bd-map" role="img" aria-label="Map of Bangladesh with Gari Mela depots"></svg>
+        <figcaption class="map-note"><span data-lang="bn">বৃত্তের আকার = উপলব্ধ গাড়ির সংখ্যা</span><span data-lang="en">Circle size = vehicles available</span></figcaption>
+      </figure>
+      <div class="depot-panel" id="depot-panel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ============ BRANDS ============ -->
+  <section class="section section--brands" aria-labelledby="brands-title">
+    <div class="wrap">
+      <div class="section__head">
+        <h2 class="h2" id="brands-title"><span data-lang="bn">আপনার চেনা ব্র্যান্ড</span><span data-lang="en">Brands you already know</span></h2>
+        <a class="link" href="brands.html"><span data-lang="bn">সব ব্র্যান্ড</span><span data-lang="en">All brands</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-right"/></svg></a>
+      </div>
+      <div class="brand-wall reveal" id="brand-wall"></div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST (navy) ============ -->
+  <section class="trust" aria-labelledby="trust-title">
+    <div class="wrap trust__grid">
+      <div>
+        <h2 class="h2" id="trust-title"><span data-lang="bn">সার্টিফাইড মেকানিক, বিক্রয়ের পরেও পাশে</span><span data-lang="en">Certified mechanics, after the sale too</span></h2>
+        <p class="lede"><span data-lang="bn">আমরা সার্টিফাইড মেকানিকদের মাধ্যমে সর্বোচ্চ মানের বিক্রয়োত্তর সেবা নিশ্চিত করি, যা আপনার গাড়িকে শীর্ষ অবস্থায় রাখে। টাটা, মাহিন্দ্রা ও ডংফেংের মতো জনপ্রিয় ব্র্যান্ডের জন্য এই সেবা অত্যন্ত গুরুত্বপূর্ণ।</span><span data-lang="en">We guarantee top-notch after-sales service by certified mechanics, keeping your vehicle in peak condition. It matters most for popular brands like Tata, Mahindra and Dongfeng.</span></p>
+      </div>
+      <dl class="trust__facts">
+        <div><dt><span data-lang="bn">ওয়ার্কশপ</span><span data-lang="en">Workshops</span></dt><dd class="num"><span data-lang="bn">২৩</span><span data-lang="en">23</span></dd></div>
+        <div><dt><span data-lang="bn">বছরের অভিজ্ঞতা</span><span data-lang="en">Years of experience</span></dt><dd class="num"><span data-lang="bn">৩০</span><span data-lang="en">30</span></dd></div>
+        <div><dt><span data-lang="bn">এখন বিক্রির জন্য</span><span data-lang="en">For sale right now</span></dt><dd class="num" data-count="available">425</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ HOW BUYING WORKS (a real sequence) ============ -->
+  <section class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 class="h2" id="how-title"><span data-lang="bn">কেনা খুব সহজ</span><span data-lang="en">How buying works</span></h2>
+      <ol class="steps reveal">
+        <li>
+          <span class="steps__n num">1</span>
+          <h3><span data-lang="bn">গাড়ি বাছাই করে অফার দিন</span><span data-lang="en">Pick a vehicle, make an offer</span></h3>
+          <p><span data-lang="bn">Garimela.com-এ নিবন্ধন করুন, পছন্দের গাড়িতে বিড করুন। বিড করার পর আমাদের প্রতিনিধি আপনার নম্বরে কল করবেন।</span><span data-lang="en">Register on Garimela.com and bid on the vehicle you like. A representative calls your registered number after you bid.</span></p>
+        </li>
+        <li>
+          <span class="steps__n num">2</span>
+          <h3><span data-lang="bn">ডিপোতে গিয়ে দেখে নিন</span><span data-lang="en">Inspect it at the depot</span></h3>
+          <p><span data-lang="bn">বিড করার আগে বা পরে নির্ধারিত ডিপোতে গিয়ে গাড়িটি দেখে নিতে পারবেন। সময় ঠিক করতে হটলাইনে কল করুন।</span><span data-lang="en">Visit the designated depot to see the vehicle before or after you bid. Call the hotline to set a time.</span></p>
+        </li>
+        <li>
+          <span class="steps__n num">3</span>
+          <h3><span data-lang="bn">পেমেন্ট করে মালিকানা নিন</span><span data-lang="en">Pay and take ownership</span></h3>
+          <p><span data-lang="bn">ব্যাংক ট্রান্সফার, মোবাইল ব্যাংকিং (বিকাশ, নগদ, রকেট) বা নির্ধারিত স্থানে নগদে পেমেন্ট, তারপর মালিকানা হস্তান্তর।</span><span data-lang="en">Pay by bank transfer, mobile banking (bKash, Nagad, Rocket) or cash at a designated location, then transfer ownership.</span></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ VOICES ============ -->
+  <section class="section section--voices" aria-labelledby="voices-title">
+    <div class="wrap">
+      <h2 class="h2" id="voices-title"><span data-lang="bn">আমাদের সম্পর্কে মানুষ কী বলছেন</span><span data-lang="en">What buyers say</span></h2>
+      <div class="voices" id="voices"></div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section section--faq" aria-labelledby="faq-title">
+    <div class="wrap faq-grid">
+      <div>
+        <h2 class="h2" id="faq-title"><span data-lang="bn">সাধারণ প্রশ্ন</span><span data-lang="en">Common questions</span></h2>
+        <a class="link" href="help.html"><span data-lang="bn">সব প্রশ্ন ও উত্তর</span><span data-lang="en">All questions</span><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#arrow-right"/></svg></a>
+      </div>
+      <div class="faqs" id="faqs"></div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSE: an input, and the number ============ -->
+  <section class="close" aria-labelledby="close-title">
+    <div class="wrap close__grid">
+      <div>
+        <h2 id="close-title"><span data-lang="bn">আপনার কি কোনো প্রশ্ন আছে?</span><span data-lang="en">Have a question?</span></h2>
+        <p><span data-lang="bn">আমাদের প্রতিনিধির সাথে কথা বলুন।</span><span data-lang="en">Talk to one of our people.</span> <span data-i18n="hours"></span></p>
+      </div>
+      <a class="close__call" href="tel:16758">
+        <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#phone"/></svg>
+        <span class="num">16758</span>
+      </a>
+      <form class="close__search" data-search role="search" action="vehicles.html">
+        <label for="cq"><span data-lang="bn">অথবা নিজেই খুঁজুন</span><span data-lang="en">Or search yourself</span></label>
+        <div>
+          <input id="cq" name="q" type="search" enterkeyhint="search" data-i18n-ph="searchPh">
+          <button class="btn btn--dark" type="submit" data-i18n="searchBtn"></button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+</body>
+</html>
