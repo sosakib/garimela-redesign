@@ -9,7 +9,7 @@
 - [x] Pages: index, vehicles, vehicle, brands, about, help, careers, terms (bn + en), privacy (en only, as live), 404.
 - [x] Verified in preview at 1440 and 375: hero scroll planes, depot map tap, showroom tabs, filters + chips + empty state, EN toggle, no horizontal overflow.
 - [x] Local git repo, first commit on `main`.
-- [ ] GitHub repo + Pages: **waiting on the go-ahead to make a public repo** (free Pages needs public).
+- [x] Public repo github.com/sosakib/garimela-redesign, Pages at https://sosakib.github.io/garimela-redesign/ (approved by user 10 Nov).
 
 ## Data issues found on the live site (worth telling the client)
 - Testimonial photos return 403 from the CDN (broken on garimela.com too). Rebuild uses monograms.
