@@ -14,7 +14,7 @@
   const T = {
     bn: {
       skip: "মূল অংশে যান", home: "হোম", vehicles: "সব যানবাহন", brands: "ব্র্যান্ড", help: "সাহায্য", about: "আমাদের সম্পর্কে",
-      callNow: "এখনই কল করুন", login: "লগইন", menu: "মেনু", close: "বন্ধ করুন",
+      callNow: "এখনই কল করুন", login: "লগইন", menu: "মেনু", close: "বন্ধ করুন", theme: "লাইট / ডার্ক মোড",
       cash: "নগদ মূল্য", inst: "কিস্তি মূল্য", sold: "বিক্রি হয়ে গেছে", viewAll: "সব দেখুন", photos: "ছবি",
       searchPh: "মডেল, ব্র্যান্ড বা জেলা লিখুন", searchBtn: "খুঁজুন", anyType: "সব ধরন",
       support: "কাস্টমার সাপোর্ট", hours: "রবি - বৃহস্পতি, সকাল ৯টা - সন্ধ্যা ৬টা",
@@ -26,7 +26,7 @@
     },
     en: {
       skip: "Skip to content", home: "Home", vehicles: "All vehicles", brands: "Brands", help: "Help", about: "About us",
-      callNow: "Call now", login: "Log in", menu: "Menu", close: "Close",
+      callNow: "Call now", login: "Log in", menu: "Menu", close: "Close", theme: "Light / dark mode",
       cash: "Cash price", inst: "Installment", sold: "Sold", viewAll: "View all", photos: "photos",
       searchPh: "Model, brand or district", searchBtn: "Search", anyType: "All types",
       support: "Customer support", hours: "Sun - Thu, 9 am - 6 pm",
@@ -63,6 +63,38 @@
     renderers.forEach((fn) => fn());
   }
 
+  /* ---------------- theme ---------------- */
+  const darkMQ = matchMedia("(prefers-color-scheme: dark)");
+  function setTheme(th) {
+    const root = document.documentElement;
+    root.classList.add("theming");                       // colours ease, layout doesn't move
+    root.dataset.theme = th;
+    $$('meta[name="theme-color"]').forEach((m) => (m.content = th === "dark" ? "#12161f" : "#ED1C25"));
+    setTimeout(() => root.classList.remove("theming"), 420);
+  }
+  darkMQ.addEventListener("change", (e) => { let s; try { s = localStorage.getItem("gm-theme"); } catch (er) {} if (!s) setTheme(e.matches ? "dark" : "light"); });
+
+  /* ---------------- ambient background: drifting brand light + pointer-lit dot grid ---------------- */
+  function ambient() {
+    const el = document.createElement("div");
+    el.className = "ambient";
+    el.setAttribute("aria-hidden", "true");
+    el.innerHTML = '<i class="ambient__blob b1"></i><i class="ambient__blob b2"></i><i class="ambient__blob b3"></i><i class="ambient__grid"></i>';
+    document.body.prepend(el);
+    if (reduceMotion.matches || !matchMedia("(pointer: fine)").matches) return; // touch + reduced motion: drift only / static
+    let tx = innerWidth / 2, ty = innerHeight / 3, x = tx, y = ty, raf = 0, last = 0;
+    const tick = (now) => {
+      const k = 1 - Math.exp(-(now - (last || now)) / 1000 * 7); // frame-rate independent ease toward pointer
+      last = now;
+      x += (tx - x) * k; y += (ty - y) * k;
+      el.style.setProperty("--mx", x.toFixed(1) + "px");
+      el.style.setProperty("--my", y.toFixed(1) + "px");
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(tick) : 0;
+      if (!raf) last = 0;
+    };
+    addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
+  }
+
   /* ---------------- data ---------------- */
   let dataP;
   const data = () => (dataP ||= fetch("data/site.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(index));
@@ -80,9 +112,9 @@
   const NOIMG = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 3"><rect width="4" height="3" fill="#eceff4"/></svg>');
   const thumb = (v) => v.img[0] || NOIMG;
 
-  function card(d, v, { eager = false } = {}) {
+  function card(d, v, { eager = false, i = 0 } = {}) {
     const href = `vehicle.html?v=${encodeURIComponent(v.slug)}`;
-    return `<a class="vcard${v.sold ? " vcard--sold" : ""}" href="${href}">
+    return `<a class="vcard${v.sold ? " vcard--sold" : ""}" href="${href}" style="--i:${Math.min(i, 8)}">
       <div class="vcard__media">
         <img src="${esc(thumb(v))}" alt="${esc(pick(v.t, v.tb))}" loading="${eager ? "eager" : "lazy"}" decoding="async" width="400" height="300">
         ${v.sold ? `<span class="badge badge--sold">${t("sold")}</span>` : ""}
@@ -110,9 +142,10 @@
       head.innerHTML = `
       <a class="skip" href="#main" data-i18n="skip"></a>
       <nav class="nav glass" aria-label="Primary">
-        <a class="nav__logo" href="index.html"><img src="assets/img/logo.png" alt="Gari Mela" width="84" height="34"></a>
+        <a class="nav__logo" href="index.html"><img class="logo-l" src="assets/img/logo.png" alt="Gari Mela" width="82" height="34"><img class="logo-d" src="assets/img/logo-dark.png" alt="Gari Mela" width="82" height="34"></a>
         <div class="nav__links">${PAGES.map(([h, k]) => `<a href="${h}" ${h === here ? 'aria-current="page"' : ""} data-i18n="${k}"></a>`).join("")}</div>
         <div class="nav__end">
+          <button class="theme-btn" type="button" data-i18n-aria="theme">${icon("sun", "icon i-sun")}${icon("moon", "icon i-moon")}</button>
           <div class="lang" role="group" aria-label="Language"><button type="button" data-set-lang="bn">বাংলা</button><button type="button" data-set-lang="en">EN</button></div>
           <a class="btn btn--ghost btn--sm nav__login" href="${LIVE}/login" data-i18n="login"></a>
           <a class="btn btn--primary btn--sm nav__call" href="tel:${HOTLINE}">${icon("phone")}<span data-i18n="callNow"></span><span class="num">${HOTLINE}</span></a>
@@ -124,10 +157,20 @@
           <div class="sheet__grab"></div>
           <nav>${PAGES.map(([h, k]) => `<a href="${h}"><span data-i18n="${k}"></span>${icon("arrow-right")}</a>`).join("")}
             <a href="${LIVE}/login"><span data-i18n="login"></span>${icon("arrow-right")}</a></nav>
+          <div class="sheet__prefs">
+            <div class="lang" role="group" aria-label="Language"><button type="button" data-set-lang="bn">বাংলা</button><button type="button" data-set-lang="en">EN</button></div>
+            <button class="theme-btn" type="button" data-i18n-aria="theme">${icon("sun", "icon i-sun")}${icon("moon", "icon i-moon")}</button>
+          </div>
           <a class="btn btn--primary" href="tel:${HOTLINE}">${icon("phone")}<span data-i18n="callNow"></span> ${HOTLINE}</a>
         </div>
       </div>`;
       head.addEventListener("click", (e) => { const b = e.target.closest("[data-set-lang]"); if (b) setLang(b.dataset.setLang); });
+      head.addEventListener("click", (e) => {
+        if (!e.target.closest(".theme-btn")) return;
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem("gm-theme", next); } catch (e) {}
+        setTheme(next);
+      });
       const sheet = $("#menu-sheet"), btn = $(".nav__menu");
       const openSheet = (open) => {
         sheet.toggleAttribute("data-open", open); btn.setAttribute("aria-expanded", String(open));
@@ -202,19 +245,27 @@
     // hero: one shared progress value drives independent planes
     const hero = $(".hero");
     if (hero) {
-      let ticking = false;
+      // wheel steps arrive in jumps; ease a shared progress toward the scroll target (critically damped, fps-independent)
+      let raf = 0, cur = -1, last = 0;
       const clamp = (x) => Math.min(1, Math.max(0, x));
-      const update = () => {
-        ticking = false;
-        const r = hero.getBoundingClientRect();
-        const span = hero.offsetHeight - innerHeight;
-        const p = span > 0 ? clamp(-r.top / span) : 0;
+      const target = () => { const span = hero.offsetHeight - innerHeight; return span > 0 ? clamp(-hero.getBoundingClientRect().top / span) : 0; };
+      const paint = (p) => {
         hero.style.setProperty("--p", p.toFixed(4));
         hero.style.setProperty("--copy", clamp(p / 0.4).toFixed(4));
         hero.style.setProperty("--beat", clamp((p - 0.38) / 0.3).toFixed(4));
         hero.style.setProperty("--exit", clamp((p - 0.78) / 0.22).toFixed(4));
       };
-      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+      const update = (now) => {
+        const t = target();
+        const k = cur < 0 || reduceMotion.matches ? 1 : 1 - Math.exp(-(now - (last || now)) / 1000 * 10);
+        last = now;
+        cur = cur < 0 ? t : cur + (t - cur) * k;
+        if (Math.abs(t - cur) < 0.0005) cur = t;
+        paint(cur);
+        raf = cur !== t ? requestAnimationFrame(update) : 0;
+        if (!raf) last = 0;
+      };
+      const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
       const io = new IntersectionObserver(([e]) => {
         if (e.isIntersecting) addEventListener("scroll", onScroll, { passive: true });
         else removeEventListener("scroll", onScroll);
@@ -271,7 +322,7 @@
     const draw = () => {
       tabs.innerHTML = list.map((x) => `<button type="button" role="tab" aria-selected="${x.name === cur}" data-type="${esc(x.name)}">${esc(pick(x.name, x.bn))} <span class="num">${num(x.count)}</span></button>`).join("") + `<span class="seg__thumb" aria-hidden="true"></span>`;
       const items = d.available.filter((v) => v.type === cur && v.img.length).slice(0, 12);
-      rail.innerHTML = items.map((v) => card(d, v)).join("");
+      rail.innerHTML = items.map((v, i) => card(d, v, { i })).join("");
       rail.scrollLeft = 0;
       more.href = `vehicles.html?type=${encodeURIComponent(cur)}`;
       more.querySelector("span").textContent = isBn() ? `সব ${pick(cur, d.typeBy[cur].bn)} দেখুন (${num(d.typeBy[cur].count)})` : `View all ${cur.toLowerCase()}s (${num(d.typeBy[cur].count)})`;
@@ -421,7 +472,7 @@
         else rows.sort((a, b) => a.sold - b.sold || b.id - a.id);
         countEl.textContent = t("vehiclesN", num(rows.length));
         grid.innerHTML = rows.length
-          ? rows.slice(0, shown).map((v, i) => card(d, v, { eager: i < 4 })).join("")
+          ? rows.slice(0, shown).map((v, i) => card(d, v, { eager: i < 4, i: i % 24 })).join("")
           : `<div class="empty"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#search"/></svg>
               <h2>${isBn() ? "এই ফিল্টারে কোনো গাড়ি পাওয়া যায়নি" : "No vehicles match these filters"}</h2>
               <p>${isBn() ? "ফিল্টার কমিয়ে দেখুন, অথবা আমাদের জানান কী খুঁজছেন।" : "Loosen a filter, or tell us what you're looking for."}</p>
@@ -552,6 +603,7 @@
   /* ---------------- boot ---------------- */
   document.addEventListener("DOMContentLoaded", () => {
     chrome();
+    ambient();
     const page = document.body.dataset.page;
     ({ home, listing, detail, brands, help: () => data().then((d) => onRender(() => faqs(d, true))) }[page] || (() => {}))();
   });

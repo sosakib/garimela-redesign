@@ -11,6 +11,13 @@
 - [x] Local git repo, first commit on `main`.
 - [x] Public repo github.com/sosakib/garimela-redesign, Pages at https://sosakib.github.io/garimela-redesign/ (approved by user 10 Nov).
 
+## 10 Nov 2026, round 2 (polish)
+- [x] Dark mode: `light-dark()` tokens (follows system, toggle in nav, stored in `gm-theme`), dark logo variant, no flash on load, colours ease on switch.
+- [x] Ambient background: three drifting brand-light blobs + pointer-lit dot field (echoes the depot map); off on touch, reduced motion and reduced transparency.
+- [x] Motion: hero planes ease toward scroll (fps-independent damping), cross-page view transitions, staggered card entrances, depot-panel swap, smooth FAQ open, scroll-linked section reveals.
+- [x] Mobile polish: hovers gated to mouse, no tap flash, 0.96 press, theme + language moved into the menu sheet on phones.
+- [x] Verified light + dark at 1440 and 375, no horizontal overflow, no console errors.
+
 ## Data issues found on the live site (worth telling the client)
 - Testimonial photos return 403 from the CDN (broken on garimela.com too). Rebuild uses monograms.
 - Homepage stat "23 satisfied customers" contradicts the 132 sold vehicles in the data. Dropped.
