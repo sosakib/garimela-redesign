@@ -1,0 +1,213 @@
+/* Gari Mela themes: three palettes x light/dark.
+   html[data-palette] picks the palette, html[data-theme] picks the mode (color-scheme drives light-dark()).
+   Anchors sampled from the brief:
+     harvest  (হেমন্ত)  #117D65 emerald · #667588 slate · #D7A753 gold
+     dusk     (গোধূলি)  #112639 navy · #EA7832 orange · #FFFFFF white
+     monsoon  (বর্ষা)   #1E272E charcoal · #F4F8FB mist · #0B7E90 teal
+   Neutrals are tinted toward each palette's own hue. Text pairs are checked to WCAG AA in all six modes. */
+
+/* ---------- HARVEST: paddy green, golden sun, river-silt slate. Soft radii, standard width. ---------- */
+:root, :root[data-palette="harvest"] {
+  --sw1: #117D65; --sw2: #667588; --sw3: #D7A753;
+
+  --bg:        light-dark(#F3F8F5, #08140F);
+  --surface:   light-dark(#FFFFFF, #0E1F18);
+  --sunk:      light-dark(#E5EEE9, #142920);
+  --line:      light-dark(#D3E0D9, #22402F);
+  --ink:       light-dark(#0F2A22, #EDF4EF);
+  --ink-2:     light-dark(#3A5149, #C0D1C7);
+  --ink-3:     light-dark(#53665F, #92A99C);
+
+  --brand: #117D65; --brand-hi: #0B634F; --on-brand: #FFFFFF;
+  --brand-ink: light-dark(#0D6B56, #63D6B5);
+  --accent: #D7A753; --on-accent: #2A1D05;
+  --accent-ink: light-dark(#86600F, #E4BD6E);
+  --tint:      light-dark(#E4F0EA, #0F2A20);
+  --chip-bg:   light-dark(#DCEBE3, #1A3A2D);
+  --chip-ink:  light-dark(#0D4A3C, #BFE9DA);
+  --deep:      light-dark(#0C2C24, #040D09);
+  --on-deep: #CFE2D8;
+  --focus:     light-dark(#0D6B56, #8EE3CA);
+  --shade:     light-dark(#0C2C24, #000000);
+
+  --glass-bg:  light-dark(rgb(255 255 255 / .6), rgb(14 31 24 / .55));
+  --card-bg:   light-dark(rgb(255 255 255 / .8), rgb(16 35 27 / .74));
+  --rim: rgb(215 167 83 / .6);
+  --glow-1:    light-dark(rgb(17 125 101 / .26), rgb(17 125 101 / .42));
+  --glow-2:    light-dark(rgb(215 167 83 / .34), rgb(215 167 83 / .2));
+  --glow-3:    light-dark(rgb(102 117 136 / .22), rgb(102 117 136 / .3));
+  --dotgrid:   light-dark(rgb(12 44 36 / .4), rgb(207 226 216 / .3));
+
+  /* hero + close stage: morning sky over paddy, the sun low behind the trucks */
+  --sky-1:     light-dark(#0B5E4C, #062E25);
+  --sky-m:     light-dark(#0F7560, #0A4134);
+  --sky-2:     light-dark(#2E9A78, #12604C);
+  --sun: rgb(234 190 106 / .8);
+  --floor-1:   light-dark(#0A5241, #053026);
+  --floor-2:   light-dark(#063A2E, #021A14);
+  --stage-accent: #F0CB82;
+  --rosette: rgb(244 206 128 / .34);
+  --land:      light-dark(#164F40, #0F3A2E);
+  --land-edge: light-dark(#2E7462, #1F5747);
+  --dot: #E2B562;
+  --star: #E2A93B;
+
+  --r-sm: 10px; --r-md: 16px; --r-lg: 26px; --r-xl: 38px;
+  --wdth-d: 104; --blur: 22px;
+}
+
+/* ---------- DUSK: godhuli sky, headlight orange, white. Crisp radii, wide display type. ---------- */
+:root[data-palette="dusk"] {
+  --sw1: #112639; --sw2: #EA7832; --sw3: #FFFFFF;
+
+  --bg:        light-dark(#F7F9FC, #08121D);
+  --surface:   light-dark(#FFFFFF, #0E1C2C);
+  --sunk:      light-dark(#EBF0F6, #13263A);
+  --line:      light-dark(#D7E0EA, #213750);
+  --ink:       light-dark(#112639, #F3F6FA);
+  --ink-2:     light-dark(#384A5D, #C3CEDA);
+  --ink-3:     light-dark(#536476, #92A3B6);
+
+  /* orange carries navy text (white on orange fails contrast); hover goes lighter so navy text keeps 5:1 */
+  --brand:     light-dark(#E3691F, #EA7832); --brand-hi: #F28C4C; --on-brand: #112639;
+  --brand-ink: light-dark(#B04812, #F59A5E);
+  --accent: #F2B65A; --on-accent: #112639;
+  --accent-ink: light-dark(#965A0C, #F6C27A);
+  --tint:      light-dark(#FCEDE3, #16233A);
+  --chip-bg:   light-dark(#E3EBF4, #1A3150);
+  --chip-ink:  light-dark(#112639, #D3E1F0);
+  --deep:      light-dark(#112639, #050C15);
+  --on-deep: #D2DCE8;
+  --focus:     light-dark(#112639, #FFB37D);
+  --shade:     light-dark(#112639, #000000);
+
+  --glass-bg:  light-dark(rgb(255 255 255 / .62), rgb(14 28 44 / .55));
+  --card-bg:   light-dark(rgb(255 255 255 / .82), rgb(15 30 47 / .74));
+  --rim: rgb(234 120 50 / .62);
+  --glow-1:    light-dark(rgb(234 120 50 / .24), rgb(234 120 50 / .26));
+  --glow-2:    light-dark(rgb(17 38 57 / .16), rgb(52 92 150 / .38));
+  --glow-3:    light-dark(rgb(242 182 90 / .26), rgb(150 70 110 / .24));
+  --dotgrid:   light-dark(rgb(17 38 57 / .42), rgb(210 220 232 / .3));
+
+  /* navy overhead, indigo mid-sky, the last orange at the horizon */
+  --sky-1:     light-dark(#10253A, #07111C);
+  --sky-m:     light-dark(#2A3560, #1A2448);
+  --sky-2:     light-dark(#D9662B, #A9502C);
+  --sun: rgb(255 158 88 / .72);
+  --floor-1:   light-dark(#1B2234, #10151F);
+  --floor-2:   light-dark(#0D1522, #06090F);
+  --stage-accent: #FFB774;
+  --rosette: rgb(255 186 130 / .2);
+  --land:      light-dark(#1D3A57, #142C45);
+  --land-edge: light-dark(#35587C, #284766);
+  --dot: #F08A47;
+  --star: #F2B65A;
+
+  --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
+  --wdth-d: 116; --blur: 20px;
+}
+
+/* ---------- MONSOON: rain clouds, river teal, wet charcoal road. Frostier glass, narrow display type. ---------- */
+:root[data-palette="monsoon"] {
+  --sw1: #1E272E; --sw2: #F4F8FB; --sw3: #0B7E90;
+
+  --bg:        light-dark(#F4F8FB, #12191E);
+  --surface:   light-dark(#FFFFFF, #1E272E);
+  --sunk:      light-dark(#E6EEF3, #263139);
+  --line:      light-dark(#D2DEE6, #34434D);
+  --ink:       light-dark(#1E272E, #F4F8FB);
+  --ink-2:     light-dark(#40505B, #C4D0D8);
+  --ink-3:     light-dark(#596976, #94A6B2);
+
+  --brand: #0B7E90; --brand-hi: #086A7A; --on-brand: #FFFFFF;
+  --brand-ink: light-dark(#09697A, #5ACDDE);
+  --accent: #6FD0DE; --on-accent: #0E2A30;
+  --accent-ink: light-dark(#0A6C7C, #8FE0EA);
+  --tint:      light-dark(#E1EFF2, #18282E);
+  --chip-bg:   light-dark(#DAEAEE, #223940);
+  --chip-ink:  light-dark(#0A4E5A, #C6ECF2);
+  --deep:      light-dark(#1E272E, #0A0F12);
+  --on-deep: #CBD7DF;
+  --focus:     light-dark(#09697A, #7FDDEB);
+  --shade:     light-dark(#1E272E, #000000);
+
+  --glass-bg:  light-dark(rgb(255 255 255 / .55), rgb(30 39 46 / .5));
+  --card-bg:   light-dark(rgb(255 255 255 / .8), rgb(30 39 46 / .76));
+  --rim: rgb(111 208 222 / .6);
+  --glow-1:    light-dark(rgb(11 126 144 / .24), rgb(11 126 144 / .4));
+  --glow-2:    light-dark(rgb(30 39 46 / .12), rgb(111 208 222 / .14));
+  --glow-3:    light-dark(rgb(111 208 222 / .3), rgb(70 110 130 / .3));
+  --dotgrid:   light-dark(rgb(30 39 46 / .42), rgb(203 215 223 / .3));
+
+  /* low cloud, river light at the horizon, a wet road that mirrors the trucks */
+  --sky-1:     light-dark(#0A5866, #0A2F37);
+  --sky-m:     light-dark(#0B7E90, #0B4C59);
+  --sky-2:     light-dark(#5DB8C6, #157386);
+  --sun: rgb(232 246 250 / .55);
+  --floor-1:   light-dark(#0A4F5C, #0B2A31);
+  --floor-2:   light-dark(#073640, #061A1F);
+  --stage-accent: #C4F1F7;
+  --rosette: rgb(222 246 250 / .2);
+  --land:      light-dark(#2B3842, #24313A);
+  --land-edge: light-dark(#4A5B67, #3B4C57);
+  --dot: #4FC4D6;
+  --star: #F0B429;
+
+  --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-xl: 32px;
+  --wdth-d: 98; --blur: 30px;
+}
+
+/* =====================================================================
+   PER-THEME WEATHER on the hero stage (::after of .hero__fx).
+   Contained to the stage, static images moved with transform/position only.
+   ===================================================================== */
+.hero__fx::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+
+/* harvest: golden chaff drifting up through low sun */
+:root[data-palette="harvest"] .hero__fx::after {
+  background-image:
+    radial-gradient(2px 2px at 12% 20%, rgb(255 226 160 / .9), transparent),
+    radial-gradient(1.5px 1.5px at 31% 64%, rgb(255 226 160 / .7), transparent),
+    radial-gradient(2.5px 2.5px at 47% 38%, rgb(255 226 160 / .6), transparent),
+    radial-gradient(1.5px 1.5px at 66% 82%, rgb(255 226 160 / .8), transparent),
+    radial-gradient(2px 2px at 78% 12%, rgb(255 226 160 / .7), transparent),
+    radial-gradient(1.5px 1.5px at 91% 52%, rgb(255 226 160 / .8), transparent);
+  background-size: 520px 340px;
+  -webkit-mask-image: linear-gradient(to top, transparent 8%, #000 35%, #000 55%, transparent 85%);
+  mask-image: linear-gradient(to top, transparent 8%, #000 35%, #000 55%, transparent 85%);
+  animation: motes 26s linear infinite;
+}
+@keyframes motes { to { background-position: 60px -340px; } }
+
+/* dusk: first stars over the indigo, drifting with the sky */
+:root[data-palette="dusk"] .hero__fx::after {
+  background-image:
+    radial-gradient(1.5px 1.5px at 8% 14%, #fff, transparent),
+    radial-gradient(1px 1px at 22% 40%, #fff, transparent),
+    radial-gradient(2px 2px at 37% 9%, rgb(255 236 214), transparent),
+    radial-gradient(1px 1px at 55% 30%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 71% 18%, #fff, transparent),
+    radial-gradient(1px 1px at 86% 44%, #fff, transparent),
+    radial-gradient(1px 1px at 95% 8%, #fff, transparent);
+  background-size: 640px 300px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 10%, transparent 52%);
+  mask-image: linear-gradient(to bottom, #000 10%, transparent 52%);
+  animation: sky-drift 120s linear infinite, twinkle 5s var(--ease-in-out) infinite alternate;
+}
+@keyframes sky-drift { to { background-position: -640px 0; } }
+@keyframes twinkle { from { opacity: .55; } to { opacity: 1; } }
+
+/* monsoon: fine rain falling across the stage, and the trucks mirrored in the wet road */
+:root[data-palette="monsoon"] .hero__fx::after {
+  inset: -64px 0 0;
+  background: repeating-linear-gradient(104deg, transparent 0 15px, rgb(255 255 255 / .16) 15px 16px, transparent 16px 41px, rgb(255 255 255 / .09) 41px 42px, transparent 42px 67px);
+  -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 22px, transparent 22px 64px), linear-gradient(to bottom, #000 30%, transparent 78%);
+  -webkit-mask-composite: source-in;
+  mask-image: repeating-linear-gradient(to bottom, #000 0 22px, transparent 22px 64px), linear-gradient(to bottom, #000 30%, transparent 78%);
+  mask-composite: intersect;
+  animation: rain .7s linear infinite;
+}
+@keyframes rain { to { transform: translate(-16px, 64px); } }
+:root[data-palette="monsoon"] .hero__lineup img { -webkit-box-reflect: below -2px linear-gradient(transparent 62%, rgb(0 0 0 / .32)); }
+
+@media (prefers-reduced-motion: reduce) { .hero__fx::after { animation: none !important; } }

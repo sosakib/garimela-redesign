@@ -18,6 +18,15 @@
 - [x] Mobile polish: hovers gated to mouse, no tap flash, 0.96 press, theme + language moved into the menu sheet on phones.
 - [x] Verified light + dark at 1440 and 375, no horizontal overflow, no console errors.
 
+## 12 Nov 2026, round 3 (three palette themes)
+- [x] Brief: three palettes from the user's swatch sheet, each light + dark, more gradient / glass / modern, with a human touch. PRODUCT.md written (register: brand; personality: warm, local, crafted; avoid beige luxury).
+- [x] Themes: হেমন্ত Harvest (emerald / slate / gold), গোধূলি Dusk (navy / orange / white), বর্ষা Monsoon (charcoal / mist / teal). `themes.css` tokens, `theme-init.js` (no flash, `?theme=&mode=` share links).
+- [x] Each theme has its own hero sky and weather (golden chaff, twilight stars, rain + wet-road reflection), radii, display width and glass blur.
+- [x] Picker: native popover in the nav, inline in the phone menu; palette x Day / Auto / Night; circular view-transition reveal from the tapped control.
+- [x] Human touches: greeting chip (time of day + live count), hand-drawn underlines, Atma handwritten notes, taped testimonial notes, alpona rosette (`assets/rosette.svg`) as hero sun and section watermarks, paper grain.
+- [x] Nav collapses to the menu below 1100px (links wrapped at 1024).
+- [x] Verified: 18 text/background pairs pass AA in all 6 modes (measured in the browser), hero copy >= 4.8:1 on every sky at 1024 and 375, no horizontal overflow at 375, listing + detail pages themed, choice persists across pages.
+
 ## Data issues found on the live site (worth telling the client)
 - Testimonial photos return 403 from the CDN (broken on garimela.com too). Rebuild uses monograms.
 - Homepage stat "23 satisfied customers" contradicts the 132 sold vehicles in the data. Dropped.

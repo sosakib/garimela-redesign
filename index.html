@@ -2,11 +2,11 @@
 <html lang="bn">
 <head>
   <meta charset="utf-8">
-  <script>(()=>{let t;try{t=localStorage.getItem("gm-theme")}catch(e){}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")})()</script>
+  <script src="assets/theme-init.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>গাড়িমেলা · Gari Mela | নগদ বা কিস্তিতে ব্যবহৃত পিকআপ, ট্রাক ও বাস</title>
   <meta name="description" content="গাড়িমেলায় আপনার স্বপ্নের গাড়ি কিনুন নগদ বা কিস্তিতে। মাহিন্দ্রা, টাটা, আইশারসহ ১৫টি ব্র্যান্ডের ব্যবহৃত পিকআপ, ট্রাক ও বাস, সারাদেশের ডিপোতে।">
-  <meta name="theme-color" content="#ED1C25">
+  <meta name="theme-color" content="#0B5E4C">
   <meta name="color-scheme" content="light dark">
   <meta property="og:title" content="গাড়িমেলা · Gari Mela">
   <meta property="og:description" content="নগদ বা কিস্তিতে ব্যবহৃত পিকআপ, ট্রাক ও বাস। হটলাইন ১৬৭৫৮">
@@ -15,10 +15,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://garimela-storage.sgp1.cdn.digitaloceanspaces.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wdth,wght@75..125,300..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wdth,wght@75..125,300..800&family=Atma:wght@600&display=swap">
   <link rel="preload" as="image" href="assets/img/lineup.webp" media="(min-width: 700px)">
   <link rel="preload" as="image" href="assets/img/lineup-sm.webp" media="(max-width: 699px)">
   <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/themes.css">
   <script src="assets/site.js" defer></script>
 </head>
 <body data-page="home" class="is-home">
@@ -30,12 +31,14 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__stage">
       <div class="hero__back" aria-hidden="true"></div>
+      <div class="hero__fx" aria-hidden="true"></div>
       <p class="hero__word" aria-hidden="true"><span data-lang="bn">গাড়িমেলা</span><span data-lang="en">GARI MELA</span></p>
 
       <div class="hero__copy wrap">
+        <p class="hero__hello glass"><span class="live-dot" aria-hidden="true"></span><span data-hello></span></p>
         <h1 id="hero-title">
-          <span data-lang="bn">গাড়িমেলায় আপনার স্বপ্নের গাড়ি কিনুন</span>
-          <span data-lang="en">Buy your dream vehicle at Gari Mela</span>
+          <span data-lang="bn">গাড়িমেলায় আপনার <span class="scribble">স্বপ্নের গাড়ি</span> কিনুন</span>
+          <span data-lang="en">Buy your <span class="scribble">dream vehicle</span> at Gari Mela</span>
         </h1>
         <p class="hero__sub">
           <span data-lang="bn">নগদ বা কিস্তিতে। যাচাই করা তালিকা, সারাদেশের ডিপোতে দেখে কেনার সুযোগ।</span>
@@ -111,11 +114,12 @@
   <section class="section section--map" aria-labelledby="map-title">
     <div class="wrap map-grid">
       <div class="map-intro">
-        <h2 class="h2" id="map-title"><span data-lang="bn">আপনার কাছের ডিপোতেই<br>গাড়ি দাঁড়িয়ে আছে</span><span data-lang="en">There's a vehicle parked<br>near you</span></h2>
+        <h2 class="h2" id="map-title"><span data-lang="bn">আপনার কাছের ডিপোতেই<br>গাড়ি <span class="scribble">দাঁড়িয়ে আছে</span></span><span data-lang="en">There's a vehicle parked<br><span class="scribble">near you</span></span></h2>
         <p class="lede"><span data-lang="bn">সারাদেশে <b class="num" data-count="depots">30</b>টি জেলার ডিপোতে আমাদের গাড়ি রয়েছে। আপনার জেলায় চাপুন, দেখুন কী কী আছে।</span><span data-lang="en">Our stock sits at depots in <b class="num" data-count="depots">30</b> districts. Tap your district to see what's there.</span></p>
         <div class="depot-list" id="depot-list" aria-label="Districts"></div>
       </div>
       <figure class="map-figure">
+        <p class="hand" aria-hidden="true"><span data-lang="bn">আপনার জেলায় চাপুন</span><span data-lang="en">Tap your district</span><svg class="icon"><use href="assets/icons.svg#hand-arrow"/></svg></p>
         <svg id="bd-map" class="bd-map" role="img" aria-label="Map of Bangladesh with Gari Mela depots"></svg>
         <figcaption class="map-note"><span data-lang="bn">বৃত্তের আকার = উপলব্ধ গাড়ির সংখ্যা</span><span data-lang="en">Circle size = vehicles available</span></figcaption>
       </figure>
@@ -196,10 +200,11 @@
   <section class="close" aria-labelledby="close-title">
     <div class="wrap close__grid">
       <div>
-        <h2 id="close-title"><span data-lang="bn">আপনার কি কোনো প্রশ্ন আছে?</span><span data-lang="en">Have a question?</span></h2>
+        <h2 id="close-title"><span data-lang="bn">আপনার কি কোনো <span class="scribble">প্রশ্ন</span> আছে?</span><span data-lang="en">Have a <span class="scribble">question</span>?</span></h2>
         <p><span data-lang="bn">আমাদের প্রতিনিধির সাথে কথা বলুন।</span><span data-lang="en">Talk to one of our people.</span> <span data-i18n="hours"></span></p>
       </div>
       <a class="close__call" href="tel:16758">
+        <span class="hand" aria-hidden="true"><span data-lang="bn">আমরা শুনছি</span><span data-lang="en">We're listening</span><svg class="icon"><use href="assets/icons.svg#hand-arrow"/></svg></span>
         <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#phone"/></svg>
         <span class="num">16758</span>
       </a>

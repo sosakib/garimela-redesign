@@ -14,7 +14,12 @@
   const T = {
     bn: {
       skip: "মূল অংশে যান", home: "হোম", vehicles: "সব যানবাহন", brands: "ব্র্যান্ড", help: "সাহায্য", about: "আমাদের সম্পর্কে",
-      callNow: "এখনই কল করুন", login: "লগইন", menu: "মেনু", close: "বন্ধ করুন", theme: "লাইট / ডার্ক মোড",
+      callNow: "এখনই কল করুন", login: "লগইন", menu: "মেনু", close: "বন্ধ করুন", theme: "থিম ও রং",
+      studio: "আপনার পছন্দের রং", mode: "মোড", light: "দিন", auto: "অটো", dark: "রাত",
+      harvest: "হেমন্ত", harvestD: "ধানখেতের সবুজ, সোনালি রোদ",
+      dusk: "গোধূলি", duskD: "সন্ধ্যার আকাশ, হেডলাইটের কমলা",
+      monsoon: "বর্ষা", monsoonD: "মেঘলা আকাশ, নদীর সবুজাভ নীল",
+      hello: (h, n) => `${h >= 5 && h < 12 ? "শুভ সকাল" : h >= 12 && h < 16 ? "শুভ দুপুর" : h >= 16 && h < 19 ? "শুভ বিকেল" : h >= 19 && h < 22 ? "শুভ সন্ধ্যা" : "স্বাগতম"}! আজ ${n}টি গাড়ি আপনার অপেক্ষায়`,
       cash: "নগদ মূল্য", inst: "কিস্তি মূল্য", sold: "বিক্রি হয়ে গেছে", viewAll: "সব দেখুন", photos: "ছবি",
       searchPh: "মডেল, ব্র্যান্ড বা জেলা লিখুন", searchBtn: "খুঁজুন", anyType: "সব ধরন",
       support: "কাস্টমার সাপোর্ট", hours: "রবি - বৃহস্পতি, সকাল ৯টা - সন্ধ্যা ৬টা",
@@ -26,7 +31,12 @@
     },
     en: {
       skip: "Skip to content", home: "Home", vehicles: "All vehicles", brands: "Brands", help: "Help", about: "About us",
-      callNow: "Call now", login: "Log in", menu: "Menu", close: "Close", theme: "Light / dark mode",
+      callNow: "Call now", login: "Log in", menu: "Menu", close: "Close", theme: "Theme and colours",
+      studio: "Pick your colours", mode: "Mode", light: "Light", auto: "Auto", dark: "Dark",
+      harvest: "Harvest", harvestD: "Paddy-field green, golden sun",
+      dusk: "Dusk", duskD: "Twilight sky, headlight orange",
+      monsoon: "Monsoon", monsoonD: "Rain clouds, river teal",
+      hello: (h, n) => `${h >= 5 && h < 12 ? "Good morning" : h >= 12 && h < 17 ? "Good afternoon" : h >= 17 && h < 22 ? "Good evening" : "Welcome"}! ${n} vehicles are waiting for you today`,
       cash: "Cash price", inst: "Installment", sold: "Sold", viewAll: "View all", photos: "photos",
       searchPh: "Model, brand or district", searchBtn: "Search", anyType: "All types",
       support: "Customer support", hours: "Sun - Thu, 9 am - 6 pm",
@@ -63,16 +73,53 @@
     renderers.forEach((fn) => fn());
   }
 
-  /* ---------------- theme ---------------- */
+  /* ---------------- theme: palette (harvest | dusk | monsoon) x mode (light | dark | auto) ----------------
+     theme-init.js sets html[data-palette][data-theme] before paint; this keeps controls, storage and the
+     browser chrome colour in sync and animates switches. */
+  const PALETTES = [["harvest", "#117D65", "#667588", "#D7A753"], ["dusk", "#112639", "#EA7832", "#FFFFFF"], ["monsoon", "#1E272E", "#F4F8FB", "#0B7E90"]];
+  const CHROME = { harvest: ["#0B5E4C", "#062E25"], dusk: ["#10253A", "#07111C"], monsoon: ["#0A5866", "#0A2F37"] }; // = --sky-1
   const darkMQ = matchMedia("(prefers-color-scheme: dark)");
-  function setTheme(th) {
-    const root = document.documentElement;
-    root.classList.add("theming");                       // colours ease, layout doesn't move
-    root.dataset.theme = th;
-    $$('meta[name="theme-color"]').forEach((m) => (m.content = th === "dark" ? "#12161f" : "#ED1C25"));
-    setTimeout(() => root.classList.remove("theming"), 420);
+  const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) { return null; } };
+  function syncTheme() {
+    const r = document.documentElement, mode = store("gm-theme") || "auto";
+    $$('meta[name="theme-color"]').forEach((m) => (m.content = CHROME[r.dataset.palette][r.dataset.theme === "dark" ? 1 : 0]));
+    $$(".picker input").forEach((i) => (i.checked = i.value === (i.name.startsWith("pal") ? r.dataset.palette : mode)));
   }
-  darkMQ.addEventListener("change", (e) => { let s; try { s = localStorage.getItem("gm-theme"); } catch (er) {} if (!s) setTheme(e.matches ? "dark" : "light"); });
+  function setTheme({ palette, mode }, from) {
+    const r = document.documentElement;
+    if (palette) store("gm-palette", palette);
+    if (mode) store("gm-theme", mode === "auto" ? null : mode);
+    const u = new URL(location.href);   // a ?theme=/?mode= share link must not override the visitor's own pick on reload
+    if (u.searchParams.has("theme") || u.searchParams.has("mode")) { u.searchParams.delete("theme"); u.searchParams.delete("mode"); history.replaceState(history.state, "", u); }
+    const p = palette || r.dataset.palette;
+    const th = !mode ? r.dataset.theme : mode === "auto" ? (darkMQ.matches ? "dark" : "light") : mode;
+    if (p === r.dataset.palette && th === r.dataset.theme) return syncTheme();
+    const apply = () => { r.dataset.palette = p; r.dataset.theme = th; syncTheme(); };
+    if (!document.startViewTransition || reduceMotion.matches || !from) {   // fallback: colours ease, layout doesn't move
+      r.classList.add("theming"); apply(); setTimeout(() => r.classList.remove("theming"), 420); return;
+    }
+    const b = from.getBoundingClientRect(), x = b.left + b.width / 2, y = b.top + b.height / 2;
+    const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    r.classList.add("theme-vt");
+    const vt = document.startViewTransition(apply);
+    vt.ready.then(() => r.animate({ clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] },
+      { duration: 640, easing: "cubic-bezier(.22,1,.36,1)", pseudoElement: "::view-transition-new(root)" })).catch(() => {});
+    vt.finished.catch(() => {}).finally(() => r.classList.remove("theme-vt"));
+  }
+  darkMQ.addEventListener("change", () => { if (!store("gm-theme")) setTheme({ mode: "auto" }); });
+  // one picker template, used in the nav popover and inline in the phone menu (k keeps radio names unique)
+  const picker = (k) => `<div class="picker">
+      <p class="picker__title" data-i18n="studio"></p>
+      <fieldset class="picker__themes"><legend class="sr-only" data-i18n="theme"></legend>
+        ${PALETTES.map(([p, a, b, c]) => `<label class="picker__theme" style="--a:${a};--b:${b};--c:${c}">
+          <input class="sr-only" type="radio" name="pal-${k}" value="${p}">
+          <span class="picker__sw" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="picker__name" data-i18n="${p}"></span><span class="picker__desc" data-i18n="${p}D"></span></label>`).join("")}
+      </fieldset>
+      <fieldset class="picker__modes"><legend class="sr-only" data-i18n="mode"></legend>
+        ${[["light", "sun"], ["auto", ""], ["dark", "moon"]].map(([m, ic]) => `<label class="picker__mode">
+          <input class="sr-only" type="radio" name="mode-${k}" value="${m}">${ic ? icon(ic) : ""}<span data-i18n="${m}"></span></label>`).join("")}
+      </fieldset></div>`;
 
   /* ---------------- ambient background: drifting brand light + pointer-lit dot grid ---------------- */
   function ambient() {
@@ -145,7 +192,8 @@
         <a class="nav__logo" href="index.html"><img class="logo-l" src="assets/img/logo.png" alt="Gari Mela" width="82" height="34"><img class="logo-d" src="assets/img/logo-dark.png" alt="Gari Mela" width="82" height="34"></a>
         <div class="nav__links">${PAGES.map(([h, k]) => `<a href="${h}" ${h === here ? 'aria-current="page"' : ""} data-i18n="${k}"></a>`).join("")}</div>
         <div class="nav__end">
-          <button class="theme-btn" type="button" data-i18n-aria="theme">${icon("sun", "icon i-sun")}${icon("moon", "icon i-moon")}</button>
+          <button class="palette-btn" type="button" popovertarget="studio" data-i18n-aria="theme"><span class="palette-btn__sw" aria-hidden="true"></span></button>
+          <div class="studio glass" id="studio" popover>${picker("nav")}</div>
           <div class="lang" role="group" aria-label="Language"><button type="button" data-set-lang="bn">বাংলা</button><button type="button" data-set-lang="en">EN</button></div>
           <a class="btn btn--ghost btn--sm nav__login" href="${LIVE}/login" data-i18n="login"></a>
           <a class="btn btn--primary btn--sm nav__call" href="tel:${HOTLINE}">${icon("phone")}<span data-i18n="callNow"></span><span class="num">${HOTLINE}</span></a>
@@ -159,17 +207,15 @@
             <a href="${LIVE}/login"><span data-i18n="login"></span>${icon("arrow-right")}</a></nav>
           <div class="sheet__prefs">
             <div class="lang" role="group" aria-label="Language"><button type="button" data-set-lang="bn">বাংলা</button><button type="button" data-set-lang="en">EN</button></div>
-            <button class="theme-btn" type="button" data-i18n-aria="theme">${icon("sun", "icon i-sun")}${icon("moon", "icon i-moon")}</button>
           </div>
+          ${picker("sheet")}
           <a class="btn btn--primary" href="tel:${HOTLINE}">${icon("phone")}<span data-i18n="callNow"></span> ${HOTLINE}</a>
         </div>
       </div>`;
       head.addEventListener("click", (e) => { const b = e.target.closest("[data-set-lang]"); if (b) setLang(b.dataset.setLang); });
-      head.addEventListener("click", (e) => {
-        if (!e.target.closest(".theme-btn")) return;
-        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-        try { localStorage.setItem("gm-theme", next); } catch (e) {}
-        setTheme(next);
+      head.addEventListener("change", (e) => {
+        const i = e.target;
+        if (i.matches(".picker input")) setTheme(i.name.startsWith("pal") ? { palette: i.value } : { mode: i.value }, i.closest("label"));
       });
       const sheet = $("#menu-sheet"), btn = $(".nav__menu");
       const openSheet = (open) => {
@@ -214,6 +260,7 @@
       })).catch(() => {});
     }
     applyI18n();
+    syncTheme();
   }
 
   /* ---------------- shared bits ---------------- */
@@ -287,6 +334,8 @@
           const n = k === "available" ? d.available.length : k === "brands" ? d.brands.length : Object.keys(d.depots).length;
           el.textContent = isBn() ? digits(n) : n;
         });
+        const hello = $("[data-hello]");
+        if (hello) hello.textContent = t("hello", new Date().getHours(), num(d.available.length));
         $$("select[name=type]").forEach((s) => {
           const cur = s.value;
           s.innerHTML = `<option value="">${t("anyType")}</option>` + d.types.filter((x) => x.count).map((x) => `<option value="${esc(x.name)}">${esc(pick(x.name, x.bn))}</option>`).join("");
