@@ -27,6 +27,13 @@
 - [x] Nav collapses to the menu below 1100px (links wrapped at 1024).
 - [x] Verified: 18 text/background pairs pass AA in all 6 modes (measured in the browser), hero copy >= 4.8:1 on every sky at 1024 and 375, no horizontal overflow at 375, listing + detail pages themed, choice persists across pages.
 
+## 12 Nov 2026, round 4 (more colour in the body)
+- [x] Prices hang on showroom tags in each theme's own tag colour, never the action colour: Harvest gold, Dusk navy "night ticket" with amber figures (amber in dark), Monsoon kadam-flower yellow. Detail page price = two-part ticket (cash stub + perforated installment stub).
+- [x] Category colours, three per theme taken in turn: Harvest emerald / harvest gold / river slate, Dusk orange / twilight blue / dusk rose, Monsoon river teal / kadam yellow / water-hyacinth lilac. Used on body-type bays and counts, brand counts, step stamps and rules, note tapes and initials, spec stripes. Tint and text derived per element by fixing OKLCH lightness.
+- [x] Trust section is now a committed colour band, a different region per theme: ripe paddy gold, sunset peach (plum-indigo in dark), water-hyacinth lilac.
+- [x] Accent colour on hero figures, depot counts and prices, footer headings and hotline; brand colour on card brand lines, listing count, FAQ.
+- [x] Verified in the browser: every new text pair passes AA in all 6 modes.
+
 ## Data issues found on the live site (worth telling the client)
 - Testimonial photos return 403 from the CDN (broken on garimela.com too). Rebuild uses monograms.
 - Homepage stat "23 satisfied customers" contradicts the 132 sold vehicles in the data. Dropped.

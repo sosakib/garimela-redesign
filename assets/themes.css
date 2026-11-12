@@ -52,6 +52,15 @@
   --dot: #E2B562;
   --star: #E2A93B;
 
+  /* body colour roles. Price = a gold hang-tag (never the emerald action colour);
+     categories = emerald / harvest gold / river slate; trust = a band of ripe paddy gold */
+  --tag-bg:    light-dark(#E9C068, #D7A753); --tag-ink: #2A1D05;
+  --cat-1: #117D65; --cat-2: #C08A22; --cat-3: #56708F;
+  --trust-a:   light-dark(#EDC772, #3A2C0E);
+  --trust-b:   light-dark(#D9A84F, #221A08);
+  --trust-ink: light-dark(#1C1606, #F6EBD2);
+  --trust-num: light-dark(#0B5E4C, #F0CB82);
+
   --r-sm: 10px; --r-md: 16px; --r-lg: 26px; --r-xl: 38px;
   --wdth-d: 104; --blur: 22px;
 }
@@ -103,6 +112,17 @@
   --dot: #F08A47;
   --star: #F2B65A;
 
+  /* body colour roles. Price = a "night ticket": navy with amber figures (amber with navy in dark),
+     so orange stays the action; categories = headlight orange / twilight blue / dusk rose;
+     trust = the sunset itself (peach in light, plum-indigo in dark) */
+  --tag-bg:    light-dark(#112639, #F2B65A);
+  --tag-ink:   light-dark(#F6B65E, #112639);
+  --cat-1: #E3691F; --cat-2: #3E6FB0; --cat-3: #B0507A;
+  --trust-a:   light-dark(#FFE6D2, #2B2550);
+  --trust-b:   light-dark(#F9C59C, #18233F);
+  --trust-ink: light-dark(#112639, #F3F6FA);
+  --trust-num: light-dark(#A23F0C, #FFB774);
+
   --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
   --wdth-d: 116; --blur: 20px;
 }
@@ -153,9 +173,23 @@
   --dot: #4FC4D6;
   --star: #F0B429;
 
+  /* body colour roles from the Bengal monsoon: price = kadam-flower yellow (the warm opposite of teal);
+     categories = river teal / kadam yellow / water-hyacinth lilac; trust = a band of hyacinth lilac */
+  --tag-bg: #F5C04A; --tag-ink: #1E272E;
+  --cat-1: #0B7E90; --cat-2: #D99A1E; --cat-3: #8466C4;
+  --trust-a:   light-dark(#EEE8FA, #2B2546);
+  --trust-b:   light-dark(#D8CCF3, #1C1A2E);
+  --trust-ink: light-dark(#1E272E, #F1EEFA);
+  --trust-num: light-dark(#5A3D9E, #CDB8FF);
+
   --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-xl: 32px;
   --wdth-d: 98; --blur: 30px;
 }
+
+/* category colours are derived per element from --cat by fixing OKLCH lightness, so text on a
+   tinted chip keeps contrast in every palette: soft = pale tint, ink = same hue at reading lightness */
+:root { --soft-l: .95; --ink-l: .43; }
+:root[data-theme="dark"] { --soft-l: .3; --ink-l: .86; }
 
 /* =====================================================================
    PER-THEME WEATHER on the hero stage (::after of .hero__fx).

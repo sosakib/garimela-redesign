@@ -172,7 +172,7 @@
         <h3 class="vcard__title">${esc(pick(v.t, v.tb))}</h3>
         <span class="vcard__meta">${icon("pin")}${esc(depotName(d, v))}${modelLine(v) ? ` <span aria-hidden="true">·</span> ${esc(modelLine(v))}` : ""}</span>
         <div class="vcard__price">
-          <span class="price"><small>${t("cash")}</small>${money(v.cash)}</span>
+          <span class="price"><small>${t("cash")}</small><b class="tag num">${money(v.cash)}</b></span>
           ${v.inst ? `<span class="price price--inst"><small>${t("inst")}</small>${money(v.inst)}</span>` : ""}
         </div>
       </div>
