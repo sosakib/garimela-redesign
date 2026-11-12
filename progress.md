@@ -33,6 +33,7 @@
 - [x] Trust section is now a committed colour band, a different region per theme: ripe paddy gold, sunset peach (plum-indigo in dark), water-hyacinth lilac.
 - [x] Accent colour on hero figures, depot counts and prices, footer headings and hotline; brand colour on card brand lines, listing count, FAQ.
 - [x] Verified in the browser: every new text pair passes AA in all 6 modes.
+- [x] Follow-up: separate tag colours felt foreign to the themes; tags now derive from each theme's brand hue (pale tint + same-hue figure, accent-ringed hole), ticket stub too. Tag text >= 5.6:1 in all 6 modes.
 
 ## Data issues found on the live site (worth telling the client)
 - Testimonial photos return 403 from the CDN (broken on garimela.com too). Rebuild uses monograms.

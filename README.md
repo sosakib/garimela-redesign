@@ -25,7 +25,7 @@ Three palettes, each in light and dark (picker = the swatch button in the nav, o
 | **গোধূলি / Dusk**: twilight sky, headlight orange, first stars | `#112639` `#EA7832` `#FFFFFF` | [light](https://sosakib.github.io/garimela-redesign/?theme=dusk&mode=light) | [dark](https://sosakib.github.io/garimela-redesign/?theme=dusk&mode=dark) |
 | **বর্ষা / Monsoon**: river teal, rain across the stage, trucks mirrored on the wet road | `#1E272E` `#F4F8FB` `#0B7E90` | [light](https://sosakib.github.io/garimela-redesign/?theme=monsoon&mode=light) | [dark](https://sosakib.github.io/garimela-redesign/?theme=monsoon&mode=dark) |
 
-Each theme spends colour differently in the body: its own price-tag colour (gold / navy-and-amber night ticket / kadam yellow), three category hues for body types, steps and notes, and a trust band in its own region colour (paddy gold / sunset / water hyacinth).
+Each theme spends colour differently in the body: price tags in a quiet tint of its own brand hue (with the accent as the punched hole), three category hues for body types, steps and notes, and a trust band in its own region colour (paddy gold / sunset / water hyacinth).
 
 Tokens live in `assets/themes.css` (one block per palette, `light-dark()` for the mode); `assets/theme-init.js` applies the choice before first paint. Each theme also sets its own radii, display-type width and glass blur. All text pairs pass WCAG AA in all six modes.
 

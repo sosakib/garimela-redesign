@@ -52,9 +52,8 @@
   --dot: #E2B562;
   --star: #E2A93B;
 
-  /* body colour roles. Price = a gold hang-tag (never the emerald action colour);
+  /* body colour roles (price tags derive from --brand, see below);
      categories = emerald / harvest gold / river slate; trust = a band of ripe paddy gold */
-  --tag-bg:    light-dark(#E9C068, #D7A753); --tag-ink: #2A1D05;
   --cat-1: #117D65; --cat-2: #C08A22; --cat-3: #56708F;
   --trust-a:   light-dark(#EDC772, #3A2C0E);
   --trust-b:   light-dark(#D9A84F, #221A08);
@@ -112,11 +111,9 @@
   --dot: #F08A47;
   --star: #F2B65A;
 
-  /* body colour roles. Price = a "night ticket": navy with amber figures (amber with navy in dark),
-     so orange stays the action; categories = headlight orange / twilight blue / dusk rose;
+  /* body colour roles (price tags derive from --brand, see below);
+     categories = headlight orange / twilight blue / dusk rose;
      trust = the sunset itself (peach in light, plum-indigo in dark) */
-  --tag-bg:    light-dark(#112639, #F2B65A);
-  --tag-ink:   light-dark(#F6B65E, #112639);
   --cat-1: #E3691F; --cat-2: #3E6FB0; --cat-3: #B0507A;
   --trust-a:   light-dark(#FFE6D2, #2B2550);
   --trust-b:   light-dark(#F9C59C, #18233F);
@@ -173,9 +170,8 @@
   --dot: #4FC4D6;
   --star: #F0B429;
 
-  /* body colour roles from the Bengal monsoon: price = kadam-flower yellow (the warm opposite of teal);
+  /* body colour roles from the Bengal monsoon (price tags derive from --brand, see below);
      categories = river teal / kadam yellow / water-hyacinth lilac; trust = a band of hyacinth lilac */
-  --tag-bg: #F5C04A; --tag-ink: #1E272E;
   --cat-1: #0B7E90; --cat-2: #D99A1E; --cat-3: #8466C4;
   --trust-a:   light-dark(#EEE8FA, #2B2546);
   --trust-b:   light-dark(#D8CCF3, #1C1A2E);
@@ -190,6 +186,14 @@
    tinted chip keeps contrast in every palette: soft = pale tint, ink = same hue at reading lightness */
 :root { --soft-l: .95; --ink-l: .43; }
 :root[data-theme="dark"] { --soft-l: .3; --ink-l: .86; }
+
+/* price tag = the theme's own brand hue, held quiet: a pale tint of it (deep tint in dark) with the
+   figure in the same hue at reading lightness. It belongs to the palette instead of fighting the CTA. */
+:root, :root[data-palette] {
+  --tag-bg:   oklch(from var(--brand) var(--soft-l) calc(c * .45) h);
+  --tag-bg-2: oklch(from var(--brand) calc(var(--soft-l) - .06) calc(c * .65) h);
+  --tag-ink:  oklch(from var(--brand) var(--ink-l) min(c, .17) h);
+}
 
 /* =====================================================================
    PER-THEME WEATHER on the hero stage (::after of .hero__fx).
